@@ -50,25 +50,51 @@ const Navigation = () => {
               { name: "Impact", id: "impact" },
               { name: "Advantage", id: "advantage" },
               { name: "Business", id: "business" },
-            ].map((item) => (
-              <Button
+            ].map((item, index) => (
+              <motion.div
                 key={item.id}
-                variant="ghost"
-                onClick={() => scrollToSection(item.id)}
-                className="text-foreground hover:text-primary transition-colors duration-300"
+                whileHover={{ y: -2, scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  delay: index * 0.1 + 0.2,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 25
+                }}
               >
-                {item.name}
-              </Button>
+                <Button
+                  variant="ghost"
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-foreground hover:text-primary transition-colors duration-300 hover-lift"
+                >
+                  {item.name}
+                </Button>
+              </motion.div>
             ))}
           </div>
 
-          <Button
-            variant="default"
-            onClick={() => scrollToSection("contact")}
-            className="px-6 py-2 rounded-lg"
+          <motion.div
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ 
+              delay: 0.6,
+              type: "spring",
+              stiffness: 300,
+              damping: 25
+            }}
           >
-            Partner With Us
-          </Button>
+            <Button
+              variant="default"
+              onClick={() => scrollToSection("contact")}
+              className="px-6 py-2 rounded-lg hover-glow"
+            >
+              Partner With Us
+            </Button>
+          </motion.div>
         </div>
       </div>
     </motion.nav>

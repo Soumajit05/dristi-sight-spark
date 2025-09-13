@@ -1,11 +1,12 @@
-import { useInView } from "framer-motion";
+import { useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 export const useScrollAnimation = (options = {}) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
     once: true, 
-    margin: "-100px",
+    margin: "-50px",
+    amount: 0.3,
     ...options 
   });
 
@@ -39,6 +40,23 @@ export const useScrollAnimation = (options = {}) => {
     transition: { duration: 0.6, delay, ease: "easeOut" }
   });
 
+  const magneticHover = {
+    whileHover: { 
+      scale: 1.05,
+      y: -5,
+      transition: { type: "spring", stiffness: 400, damping: 25 }
+    },
+    whileTap: { 
+      scale: 0.95,
+      transition: { type: "spring", stiffness: 400, damping: 25 }
+    }
+  };
+
+  const parallaxY = (strength = 50) => {
+    const { scrollY } = useScroll();
+    return useTransform(scrollY, [0, 1000], [0, strength]);
+  };
+
   return {
     ref,
     isInView,
@@ -46,6 +64,8 @@ export const useScrollAnimation = (options = {}) => {
     fadeInLeft,
     fadeInRight,
     scaleIn,
-    staggeredFadeInUp
+    staggeredFadeInUp,
+    magneticHover,
+    parallaxY
   };
 };

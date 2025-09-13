@@ -91,17 +91,34 @@ const SolutionSection = () => {
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="bg-card border border-border rounded-2xl p-8 transition-all duration-300 hover:scale-105 hover:shadow-lg group"
-              initial={{ opacity: 0, y: 50, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              className="bg-card border border-border rounded-2xl p-8 transition-all duration-300 hover-lift hover-glow group magnetic-hover"
+              initial={{ opacity: 0, y: 60, rotateX: 15 }}
+              animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
               transition={{ 
-                duration: 0.6, 
-                delay: index * 0.1, 
-                ease: "easeOut" 
+                duration: 0.8, 
+                delay: index * 0.12, 
+                ease: "easeOut",
+                type: "spring",
+                stiffness: 80
+              }}
+              whileHover={{ 
+                scale: 1.05,
+                y: -8,
+                rotateX: 5,
+                transition: { type: "spring", stiffness: 300, damping: 20 }
+              }}
+              whileTap={{ 
+                scale: 0.98,
+                transition: { type: "spring", stiffness: 400, damping: 25 }
               }}
             >
-              <div className={`w-16 h-16 ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                <feature.icon className="w-8 h-8 text-white" />
+              <div className={`w-16 h-16 ${feature.color} rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-glow`}>
+                <motion.div
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <feature.icon className="w-8 h-8 text-white" />
+                </motion.div>
               </div>
               
               <h3 className="subsection-title">{feature.title}</h3>

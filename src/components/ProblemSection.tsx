@@ -38,17 +38,24 @@ const ProblemSection = () => {
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              className={`text-center p-8 rounded-2xl transition-all duration-300 hover:scale-105 ${
+              className={`text-center p-8 rounded-2xl transition-all duration-300 hover-lift hover-glow ${
                 stat.highlight
                   ? "bg-gradient-primary text-white shadow-primary"
                   : "bg-card border border-border hover:shadow-lg"
               }`}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ 
                 duration: 0.6, 
-                delay: index * 0.1, 
-                ease: "easeOut" 
+                delay: index * 0.15, 
+                ease: "easeOut",
+                type: "spring",
+                stiffness: 100
+              }}
+              whileHover={{ 
+                scale: 1.08,
+                y: -10,
+                transition: { type: "spring", stiffness: 400, damping: 25 }
               }}
             >
               <div className={`text-4xl font-bold font-montserrat mb-4 ${

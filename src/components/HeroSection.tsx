@@ -88,23 +88,39 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
         >
-          <Button
-            variant="hero"
-            size="lg"
-            onClick={() => scrollToSection("solution")}
-            className="px-8 py-4 text-lg rounded-xl"
+          <motion.div
+            whileHover={{ 
+              scale: 1.05, 
+              y: -3,
+            }}
+            whileTap={{ scale: 0.95 }}
           >
-            See Our Solution
-          </Button>
+            <Button
+              variant="hero"
+              size="lg"
+              onClick={() => scrollToSection("solution")}
+              className="px-8 py-4 text-lg rounded-xl hover-glow magnetic-hover"
+            >
+              See Our Solution
+            </Button>
+          </motion.div>
           
-          <Button
-            variant="hero-outline"
-            size="lg"
-            onClick={() => scrollToSection("contact")}
-            className="px-8 py-4 text-lg rounded-xl"
+          <motion.div
+            whileHover={{ 
+              scale: 1.05, 
+              y: -3,
+            }}
+            whileTap={{ scale: 0.95 }}
           >
-            Partner With Us
-          </Button>
+            <Button
+              variant="hero-outline"
+              size="lg"
+              onClick={() => scrollToSection("contact")}
+              className="px-8 py-4 text-lg rounded-xl hover-lift magnetic-hover"
+            >
+              Partner With Us
+            </Button>
+          </motion.div>
         </motion.div>
       </div>
 
